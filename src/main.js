@@ -41,20 +41,10 @@ const React = {
 };
 
 function Myapp() {
-  return React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "header",
-      null,
-      React.createElement(
-        "p",
-        {
-          className: "App",
-        },
-        "My React test!"
-      )
-    )
+  return (
+    <div>
+      <p className="App">My Reactjs app</p>
+    </div>
   );
 }
 
