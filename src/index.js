@@ -1,13 +1,27 @@
 import "./index.css";
 import "./App.css";
 
+function appendPropsInHTML($domElement, props) {
+  Object.entries(props).map(([key, value]) => {
+    console.log(key, value);
+    if (key === "className") {
+      $domElement.classList.add(value);
+    } else if (key === "id") {
+      $domElement.id = value;
+    }
+  });
+
+  return $domElement;
+}
+
 function convertToHTML(virtualTree) {
   if (typeof virtualTree === "string" || typeof virtualTree === "number") {
     return document.createTextNode(`${virtualTree}`);
   }
 
   const $domElement = document.createElement(virtualTree.tagName);
-  $domElement.classList.add(virtualTree.props.className);
+
+  appendPropsInHTML($domElement, virtualTree.props);
 
   virtualTree.props.children.forEach((child) => {
     $domElement.appendChild(convertToHTML(child));
@@ -43,7 +57,9 @@ const React = {
 function Myapp() {
   return (
     <div>
-      <p className="App">My Reactjs app</p>
+      <p className="App" id="one">
+        My Reactjs app
+      </p>
     </div>
   );
 }
